@@ -1,0 +1,67 @@
+配置  环境配置
+mysql -uroot -p
+show databases;
+
+#数值
+tinyint 
+
+decimal 定点 decimal(4,2)  即 13.22  2是小数点位数
+
+#字符串
+char 定长  char（10）  若输入5个数  剩下的以5个空格补上
+varchar 可变 varchar（10）可存入小于10个的字符
+
+char的存取速度很快 但是浪费空间
+text 一般用来存取文章内容
+
+#时间
+date
+time
+datetime
+timestamp
+#########################
+字段修饰
+unsigned (无修饰)
+auto_increment (自动增加)
+default
+comment （字段解释说明）
+not null（非空）
+
+索引就相当于目录
+unique（唯一索引）
+index （普通索引）
+primary key （主键）
+auto_increment 必须制定为主键
+
+
+###########################
+运算符
+= 赋值、判断都可以
+！=   <> 不等于
+and or 
+between and
+in 
+not in
+
+##############################################   语句的分类
+DDL    数据定义   
+DML    数据操作语言  增删改
+DCL     数据控制语言  用户的创建以及授权
+DQL    查询语言
+
+####  DDL
+SHOW DATABASES
+USE  切换数据库
+CREATE DATABASE X
+DROP DATABASE X
+
+create table 表名（
+x 类型 限制，  #注意这里是逗号
+。。
+）
+
+desc 表名  
+即可列出表
+show create table 表名； #可以看创建表名字段
+
+##### DML
