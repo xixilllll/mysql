@@ -49,7 +49,7 @@ DML    数据操作语言  增删改
 DCL     数据控制语言  用户的创建以及授权
 DQL    查询语言
 
-####  DDL
+###########################  DDL
 SHOW DATABASES
 USE  切换数据库
 CREATE DATABASE X
@@ -64,4 +64,50 @@ desc 表名
 即可列出表
 show create table 表名； #可以看创建表名字段
 
-##### DML
+drop table 表名  #去掉表
+
+###  字段
+alter drop  #去点字段名
+修改字段修饰 用 modify        alter table 表名 modify 列名 。。。
+修改字段名字 用 change
+添加字段   用add 
+after 列名     -- 修改或添加 位置改变 在某列后面
+
+#更改表名
+alter table 表名 rename （to） 表名   -- to加不加都可以
+
+################################ DML
+插入数据库的方法
+insert into 表名（列名，。。。）values （值，。。。）
+insert into 表名 values （。。。） #不需要加字段  但是values一一对应 不能缺
+
+############
+插入汉字 乱码的情况解决。。视频16
+
+updata 
+UPDATE table_name SET field1=new-value1, field2=new-value2
+[WHERE Clause]
+
+DELETE FROM table_name [WHERE Clause]
+
+清除表内数据，保存表结构，用 truncate。格式为：
+truncate table 表名;
+删除表用 drop，就是啥都没了。格式为：
+drop  table  表名;
+
+
+########################################  DCL
+删除mysql 中的user 修改root   然后在开始就-h[新的ip]
+设置完 flush privileges
+
+
+# 修改用户密码
+
+# 创建用户
+
+# 给用户授权
+grant 权先1，权限2 on 数据库.* to 'test'@'192.168.1.106'
+另外  所有数据库就是*.*
+
+# 撤销权限
+revoke select on 数据库.* from 'test'@'192.168.1.106'
