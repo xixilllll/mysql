@@ -7,3 +7,88 @@ SHOW CREATE TABLE 表名； 可以查看该表的引擎
 
 修改引擎  
 alter table 表名 engine= 引擎名
+
+字符集 
+
+##############   int char varchar
+位 字节 字符
+8   1    256种  英文
+
+16  2    2^16种 中文  （gbk)
+24  3           中文  （utf8）      
+
+#### int(?) ?是什么东西 不是最大长度  而是最大显示长度 需要配合 zerofill使用
+设置int（5） 输入123456  显示还是123456
+设置int(5) zerofill  输入123 则显示 00123
+
+##### char(?) ?是什么  是字符长度
+设置char（5）  输入 ‘123456’ 显示是 12345
+
+
+######   varchar（？）  跟char 类似
+
+char（255）最大 255个字符
+varchar（65535）·
+
+
+##################################################  DTL
+事务控制语言
+start transaction;
+rollback；
+commit；
+
+
+
+#### 创建视图
+CREATE VIEW [Current Product List] AS
+SELECT ProductID,ProductName
+FROM Products
+WHERE Discontinued=No
+
+
+################### 触发器
+create trigger 名字 after|before insert|update|delete on 表名 for each row
+begin
+update total_num set ？=？+1   where 。。。（举例而已）
+
+删除 drop
+
+
+
+
+######################## 数据的导入以及导出
+mysqldump
+
+1 工具 navicate  我用workbench
+
+2
+导出
+C:\Users\tang>mysqldump -uroot -p21142773   test new_table >test1.sql
+导入
+C:\Users\tang>mysql -uroot -p21142773   sys  <test1.sql
+
+
+################################################################   索引
+MySQL索引的建立对于MySQL的高效运行是很重要的，索引可以大大提高MySQL的检索速度。
+
+打个比方，如果合理的设计且使用索引的MySQL是一辆兰博基尼的话，那么没有设计和使用索引的MySQL就是一个人力三轮车
+CREATE TABLE mytable(  
+ID INT NOT NULL,   
+username VARCHAR(16) NOT NULL,  
+primary key (ID), #主键索引
+INDEX|key (username), #普通索引
+unique（。。。）#唯一索引  该字段里面的值都是唯一的
+fulltext # 全文索引  加快速度  （只支持英文）  要用自己去百度查
+foreign key（） references 表1（主键列）外键约束 只有innodb引擎支持  跟着另一个表的‘主键’走 比如表2的第3列 外键表1的主键列
+                                         #这个时候 往表2插入的时候 往第三列插入的东西 必须存在于表一的主键列   ；并且表一的东西也不能随便动了
+);  
+
+添加索引
+alter table 表名 add fulltext(password)
+
+
+
+#########################    优化
+数据量达到一定级别
+show variables like'%slow%';
+set global log_slow_queries=on|off
